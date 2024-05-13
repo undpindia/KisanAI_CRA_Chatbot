@@ -1,0 +1,16 @@
+youtube_transcript_api
+youtube_dl
+ffmpeg
+pytube
+pydub
+openai
+langchain
+langchain-openai
+azure-cognitiveservices-speech
+openpyxl
+python-dotenv
+selenium
+yt_dlp
+langdetect
+tiktoken
+pandas
