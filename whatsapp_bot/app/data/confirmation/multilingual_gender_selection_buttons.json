@@ -1,0 +1,113 @@
+{
+  "english": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+          "type": "button",
+          "body": {
+              "text": "Please select your gender."
+          },
+          "action": {
+              "buttons": [
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "ENGLISH_GENDER_BUTTON_ID_1",
+                          "title": "👨 Male"
+                      }
+                  },
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "ENGLISH_GENDER_BUTTON_ID_2",
+                          "title": "👩 Female"
+                      }
+                  },
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "ENGLISH_GENDER_BUTTON_ID_3",
+                          "title": "🌈 Other"
+                      }
+                  }
+              ]
+          }
+      }
+  },
+  "hindi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+          "type": "button",
+          "body": {
+              "text": "कृपया अपना लिंग चुनें।"
+          },
+          "action": {
+              "buttons": [
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "HINDI_GENDER_BUTTON_ID_1",
+                          "title": "👨 पुरुष"
+                      }
+                  },
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "HINDI_GENDER_BUTTON_ID_2",
+                          "title": "👩 महिला"
+                      }
+                  },
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "HINDI_GENDER_BUTTON_ID_3",
+                          "title": "🌈 अन्य"
+                      }
+                  }
+              ]
+          }
+      }
+  },
+  "marathi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+          "type": "button",
+          "body": {
+              "text": "कृपया आपला लिंग निवडा."
+          },
+          "action": {
+              "buttons": [
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "MARATHI_GENDER_BUTTON_ID_1",
+                          "title": "👨 पुरुष"
+                      }
+                  },
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "MARATHI_GENDER_BUTTON_ID_2",
+                          "title": "👩 महिला"
+                      }
+                  },
+                  {
+                      "type": "reply",
+                      "reply": {
+                          "id": "MARATHI_GENDER_BUTTON_ID_3",
+                          "title": "🌈 इतर"
+                      }
+                  }
+              ]
+          }
+      }
+  }
+}

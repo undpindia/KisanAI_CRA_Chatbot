@@ -1,0 +1,92 @@
+{
+    "english": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "Do you want to continue in English?"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ENGLISH_CONFIRM_LANGUAGE_BUTTON_ID_1",
+                "title": "✔️ Yes"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ENGLISH_CONFIRM_LANGUAGE_BUTTON_ID_2",
+                "title": "❌ No"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hindi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "क्या आप हिंदी में जारी रखना चाहते हैं?"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "HINDI_CONFIRM_LANGUAGE_BUTTON_ID_1",
+                "title": "✔️ हां"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "HINDI_CONFIRM_LANGUAGE_BUTTON_ID_2",
+                "title": "❌ नहीं"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "marathi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "क्या आप मराठी में जारी रखना चाहते हैं?"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "MARATHI_CONFIRM_LANGUAGE_BUTTON_ID_1",
+                "title": "✔️ होय"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "MARATHI_CONFIRM_LANGUAGE_BUTTON_ID_2",
+                "title": "❌ नाही"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

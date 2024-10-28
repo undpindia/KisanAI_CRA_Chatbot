@@ -1,0 +1,37 @@
+{
+    "ask_name_text":{
+        "english": "Would you like to tell me your name?",
+        "hindi": "क्या आप मुझे अपना नाम बताना चाहेंगे?",
+        "marathi": "तुम्हाला तुमचं नाव सांगायला आवडेल का?"
+    },
+    "ask_name_to_continue": {
+        "english": "I will need know your name to continue.",
+        "hindi": "आगे बढ़ने के लिए मुझे आपका नाम जानना होगा।",
+        "marathi": "आगे जाण्यासाठी मला तुमचं नाव जाणून घ्यायचं आहे."
+    },
+    "ask_location_text": {
+        "english": "Would you like to tell me your location, district and state?",
+        "hindi": "क्या आप मुझे अपने स्थान, जिला और राज्य के बारे में बताना चाहेंगे?",
+        "marathi": "तुम्हाला तुमचं स्थान, जिल्हा आणि राज्य सांगायला आवडेल का?"
+    },
+    "ask_location_to_continue": {
+        "english": "I will need know your location, district and state to continue.",
+        "hindi": "आगे बढ़ने के लिए मुझे आपके स्थान, जिला और राज्य के बारे में जानना होगा।",
+        "marathi": "आगे जाण्यासाठी मला तुमचं स्थान, जिल्हा आणि राज्य जाणून घ्यायचं आहे."
+    },
+    "ask_gender_text": {
+        "english": "Would you like to tell me your gender?",
+        "hindi": "क्या आप मुझे अपना लिंग बताना चाहेंगे?",
+        "marathi": "आपण आपले लिंग सांगू इच्छिता का?"
+    },
+    "ask_gender_to_continue": {
+        "english": "I will need to know your gender to continue.",
+        "hindi": "आगे बढ़ने के लिए मुझे आपका लिंग जानना होगा।",
+        "marathi": "आगे जाण्यासाठी मला तुमचं लिंग जाणून घ्यायचं आहे."
+    },
+    "onboarding_completed": {
+        "english": "You have successfully completed the onboarding process. You can now ask a question by sending it as a text message or by sending a voice recording.",
+        "hindi": "आपने सफलतापूर्वक ऑनबोर्डिंग प्रक्रिया पूरी की है। आप अब एक प्रश्न पूछ सकते हैं उसे एक पाठ संदेश के रूप में भेजकर या आवाज रिकॉर्डिंग के रूप में भेजकर।",
+        "marathi": "आपण ऑनबोर्डिंग प्रक्रिया सफळतापूर्वक पूर्ण केल्यात. आपण आता एक प्रश्न पाठ्यात आणि आवाज रेकॉर्डिंग म्हणून पाठवू शकता."
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "consent_video":{
+        "english": "https://example.com/dl/static/consent_video_english.mp4",
+        "hindi": "https://example.com/dl/static/consent_video_hindi.mp4",
+        "marathi": "https://example.com/dl/static/consent_video_marathi.mp4"
+    },
+    "consent_video_title_text":{
+        "english": "Consent Video",
+        "hindi": "सहमति वीडियो",
+        "marathi": "सहमती व्हिडिओ"
+    },
+    "consent_audio":{
+        "english": "https://example.com/dl/static/english_continue_confirmation_button.mp3",
+        "hindi": "https://example.com/dl/static/hindi_continue_confirmation_button.mp3",
+        "marathi": "https://example.com/dl/static/marathi_continue_confirmation_button.mp3"
+    },
+    "consent_rejection_confirmation_text": {
+        "english": "Are you sure you do not agree to provide consent? If you do not agree, you will not be able to use the Chatbot.",
+        "hindi": "क्या आप सुनिश्चित हैं कि आप सहमति नहीं देना चाहते हैं? यदि आप सहमति नहीं देते हैं, तो आप चैटबॉट का उपयोग नहीं कर सकेंगे।",
+        "marathi": "आपण सहमती देणार नाही याची खात्री आहे का? जर आपण सहमत नसाल तर आपल्याला चॅटबॉट वापरू शकत नाही."
+    },
+    "consent_rejection_followup_text": {
+        "english": "You have chosen not to provide consent for the Chatbot. If you decide to use the Chatbot in the future, you can restart the onboarding process by sending a /reset message.",
+        "hindi": "आपने चैटबॉट के लिए सहमति नहीं देने का चयन किया है। यदि आप भविष्य में चैटबॉट का उपयोग करने का निर्णय लेते हैं, तो आप /reset संदेश भेजकर पुनरारंभ कर सकते हैं।",
+        "marathi": "आपण चॅटबॉटसाठी सहमती देण्याचा निर्णय घेतला आहे. आपल्याला भविष्यात चॅटबॉट वापरायला निर्णय घेतला तर आपण /reset संदेश पाठवून पुन्हा सुरू करू शकता."
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "language_audio_mapping": {
+        "language_selection_button": {
+            "english": "https://example.com/dl/static/language_selection.mp3",
+            "hindi": "https://example.com/dl/static/language_selection.mp3",
+            "marathi": "https://example.com/dl/static/language_selection.mp3"
+        },
+        "language_confirmation_button":{
+            "english": "https://example.com/dl/static/english_language_confirmation_button.mp3",
+            "hindi": "https://example.com/dl/static/hindi_language_confirmation_button.mp3",
+            "marathi": "https://example.com/dl/static/marathi_language_confirmation_button.mp3"
+        },
+        "language_continue_button":{
+            "english": "https://example.com/dl/static/english_continue_confirmation_button.mp3",
+            "hindi": "https://example.com/dl/static/hindi_continue_confirmation_button.mp3",
+            "marathi": "https://example.com/dl/static/marathi_continue_confirmation_button.mp3"
+        },
+        "language_name_button":{
+            "english": "https://example.com/dl/static/english_name_confirmation_button.mp3",
+            "hindi": "https://example.com/dl/static/hindi_name_confirmation_button.mp3",
+            "marathi": "https://example.com/dl/static/marathi_name_confirmation_button.mp3"
+        },
+        "language_location_button":{
+            "english": "https://example.com/dl/static/english_location_confirmation_button.mp3",
+            "hindi": "https://example.com/dl/static/hindi_location_confirmation_button.mp3",
+            "marathi": "https://example.com/dl/static/marathi_location_confirmation_button.mp3"
+        },
+        "language_gender_button":{
+            "english": "https://example.com/dl/static/english_gender_confirmation_button.mp3",
+            "hindi": "https://example.com/dl/static/hindi_gender_confirmation_button.mp3",
+            "marathi": "https://example.com/dl/static/marathi_gender_confirmation_button.mp3"
+        },
+        "language_question_button":{
+            "english": "https://example.com/dl/static/english_question_confirmation_button.mp3",
+            "hindi": "https://example.com/dl/static/hindi_question_confirmation_button.mp3",
+            "marathi": "https://example.com/dl/static/marathi_question_confirmation_button.mp3"
+        }
+    }
+}

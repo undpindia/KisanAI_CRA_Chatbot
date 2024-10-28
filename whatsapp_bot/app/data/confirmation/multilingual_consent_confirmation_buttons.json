@@ -1,0 +1,92 @@
+{
+    "english": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "Do you provide your consent to continue?"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ENGLISH_CONSENT_BUTTON_ID_1",
+                "title": "✔️ Yes"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ENGLISH_CONSENT_BUTTON_ID_2",
+                "title": "❌ No"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hindi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "क्या आप जारी रखने की सहमति देते हैं?"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "HINDI_CONSENT_BUTTON_ID_1",
+                "title": "✔️ हां"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "HINDI_CONSENT_BUTTON_ID_2",
+                "title": "❌ नहीं"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "marathi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "आपली सहमती देण्यात आली का?"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "MARATHI_CONSENT_BUTTON_ID_1",
+                "title": "✔️ होय"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "MARATHI_CONSENT_BUTTON_ID_2",
+                "title": "❌ नाही"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

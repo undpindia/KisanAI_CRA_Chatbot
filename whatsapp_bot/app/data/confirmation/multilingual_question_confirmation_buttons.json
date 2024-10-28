@@ -1,0 +1,92 @@
+{
+    "english": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "message"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ENGLISH_QUESTION_BUTTON_ID_1",
+                "title": "✔️ Yes"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ENGLISH_QUESTION_BUTTON_ID_2",
+                "title": "❌ No"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hindi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "message"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "HINDI_QUESTION_BUTTON_ID_1",
+                "title": "✔️ हां"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "HINDI_QUESTION_BUTTON_ID_2",
+                "title": "❌ नहीं"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "marathi": {
+      "messaging_product": "whatsapp",
+      "recipient_type": "individual",
+      "to": "user_phone_number",
+      "type": "interactive",
+      "interactive": {
+        "type": "button",
+        "body": {
+          "text": "message"
+        },
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "MARATHI_QUESTION_BUTTON_ID_1",
+                "title": "✔️ होय"
+              }
+            },
+            {
+              "type": "reply",
+              "reply": {
+                "id": "MARATHI_QUESTION_BUTTON_ID_2",
+                "title": "❌ नाही"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

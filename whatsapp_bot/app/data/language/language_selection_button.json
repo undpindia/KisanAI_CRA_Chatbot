@@ -1,0 +1,37 @@
+{
+    "messaging_product": "whatsapp",
+    "recipient_type": "individual",
+    "to": "user_phone_number",
+    "type": "interactive",
+    "interactive": {
+        "type": "button",
+        "body": {
+            "text": "Hi! Which language would you prefer for our conversation"
+        },
+        "action": {
+            "buttons": [
+                {
+                    "type": "reply",
+                    "reply": {
+                        "id": "ENGLISH_LANGUAGE_BUTTON_ID_1",
+                        "title": "English"
+                    }
+                },
+                {
+                    "type": "reply",
+                    "reply": {
+                        "id": "HINDI_LANGUAGE_BUTTON_ID_2",
+                        "title": "हिंदी"
+                    }
+                },
+                {
+                    "type": "reply",
+                    "reply": {
+                        "id": "MARATHI_LANGUAGE_BUTTON_ID_3",
+                        "title": "मराठी"
+                    }
+                }
+            ]   
+        }
+    }
+}

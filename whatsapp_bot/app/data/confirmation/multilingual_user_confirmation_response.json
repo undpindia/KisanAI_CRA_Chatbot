@@ -1,0 +1,23 @@
+{
+    "interaction_responses": {
+      "english": {
+        "name": "Is your name {user_name}?",
+        "location": "Is your location {user_location}?",
+        "gender": "Is your gender {user_gender}?",
+        "question": "Are you asking the below question? \n\n {user_question}"
+      },
+      "hindi": {
+        "name": "क्या आपका नाम {user_name} है?",
+        "location": "क्या आपका स्थान {user_location} है?",
+        "gender": "क्या आपका लिंग {user_gender} है?",
+        "question": "अपने प्रश्न की पुष्टि करे? \n\n {user_question}"
+      },
+      "marathi": {
+        "name": "तुमचे नाव {user_name} आहे का?",
+        "location": "तुमचे स्थान {user_location} आहे का?",
+        "gender": "तुमचा लिंग {user_gender} आहे का?",
+        "question": "तुमच्या प्रश्नाची पुष्टी करा? \n\n {user_question}"
+      }
+    }
+  }
+  

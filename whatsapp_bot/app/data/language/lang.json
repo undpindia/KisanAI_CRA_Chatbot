@@ -1,0 +1,29 @@
+{
+  "english": {
+    "code": "en",
+    "code_locale": "en-IN",
+    "azure_transliteration_code": "Latn",
+    "azure_voice_name": "en-IN-NeerjaNeural",
+    "default_warning_text_for_null_voice_question": "We apologize, as we couldn't hear or understand your recent question. Please check your audio settings, ask slowly and clearly or try again later.",
+    "default_warning_text_for_null_text_question": "We apologize, as we are not able to understand your question. Please enter your question in selected language or change the language and try again.",
+    "default_warning_audio_path": "files/default/warning/en-IN.mp3"
+  },
+  "hindi": {
+    "code": "hi",
+    "code_locale": "hi-IN",
+    "azure_transliteration_code": "Deva",
+    "azure_voice_name": "hi-IN-SwaraNeural",
+    "default_warning_text_for_null_voice_question": "क्षमा करें, हम आपका हाल ही का प्रश्न सुन या समझ नहीं पाए। कृपया अपनी ऑडियो सेटिंग्स जांचें, धीरे-धीरे और स्पष्ट रूप से पूछें, या बाद में पुनः प्रयास करें।",
+    "default_warning_text_for_null_text_question": "क्षमा करें, हम आपका प्रश्न नहीं समझ सके। कृपया चयनित भाषा में अपना प्रश्न पूछें या भाषा बदलकर पुनः प्रयास करें।",
+    "default_warning_audio_path": "files/default/warning/hi-IN.mp3"
+  },
+  "marathi": {
+    "code": "mr",
+    "code_locale": "mr-IN",
+    "azure_transliteration_code": "Deva",
+    "azure_voice_name": "mr-IN-AarohiNeural",
+    "default_warning_text_for_null_voice_question": "क्षमस्व, आम्ही तुमचा अलीकडील प्रश्न ऐकू किंवा समजू शकलो नाही. कृपया तुमची ऑडिओ सेटिंग्ज तपासा, हळू आणि स्पष्टपणे विचारा किंवा नंतर पुन्हा प्रयत्न करा.",
+    "default_warning_text_for_null_text_question": "क्षमा करा, आम्ही आपल्या प्रश्नाला समजू शकत नाही. कृपया निवडलेल्या भाषेत आपला प्रश्न टाइप करा किंवा भाषा बदला आणि नंतर पुन्हा प्रयत्न करा.",
+    "default_warning_audio_path": "files/default/warning/mr-IN.mp3"
+  }
+}

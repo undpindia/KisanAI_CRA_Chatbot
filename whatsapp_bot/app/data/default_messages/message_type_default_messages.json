@@ -1,0 +1,7 @@
+{
+    "default_messages": {
+      "english": "Please give your input by sending \"Text\" message or \"Voice\" recording",
+      "hindi": "कृपया \"टेक्स्ट\" संदेश या \"वॉयस\" रिकॉर्डिंग भेजकर अपना विचार दें",
+      "marathi": "कृपया \"टेक्स्ट\" मेसेज किंवा \"व्हॉइस\" रेकॉर्डिंग पाठवून तुमचे मत मांडा"
+    }
+}
