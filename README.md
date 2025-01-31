@@ -30,6 +30,6 @@ Implementation of the advisory chatbot with the following key features:
 ### Key Team Members
 1) Swetha Kolluri, Head of Experimentation, UNDP India
 2) Parvathy Krishnan, Data Science Lead, UNDP India
-3) Prateek Desai, CEO, KissanAI and Titodi
+3) Pratik Desai, CEO, KissanAI and Titodi
    
 
