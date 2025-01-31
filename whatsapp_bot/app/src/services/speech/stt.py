@@ -6,6 +6,7 @@ from azure.cognitiveservices import speech as azure_speech
 from app.src.services.speech.converter import convert_ogg_to_mp3
 from google.cloud import speech
 from openai import OpenAI
+from whatsapp_bot.app.logs.logger import logger
 
 
 def google_speech_recognize(config: speech.RecognitionConfig, audio: speech.RecognitionAudio) -> speech.RecognizeResponse:
@@ -51,7 +52,7 @@ def azure_speech_to_text(audio_file_path, lang_locale):
             return None
 
     except Exception as e:
-        logging.error(f"Azure STT: Error in azure_speech_to_text: {e}")
+        logger.error(f"Azure STT: Error in azure_speech_to_text: {e}")
         return None
 
 def openai_whisper(audio_data, translate):
@@ -77,7 +78,7 @@ def openai_whisper(audio_data, translate):
             )
             return transcription.text
     except Exception as e:
-        logging.error(f"Error in openai_whisper: {e}")
+        logger.error(f"Error in openai_whisper: {e}")
         return None
     finally:
         # Clean up the temporary file

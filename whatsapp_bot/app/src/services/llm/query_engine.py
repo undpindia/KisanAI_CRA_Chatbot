@@ -6,6 +6,7 @@ import json
 import os
 import uuid
 from app.src.services.llm.index_initializer import vector_index
+from whatsapp_bot.app.logs.logger import logger
 
 from openai import OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))

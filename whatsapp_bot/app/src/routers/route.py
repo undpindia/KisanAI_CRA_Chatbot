@@ -4,6 +4,7 @@ from bson import ObjectId
 from app.src.models.user_details import UserDetail
 from app.src.config.database import get_mongo_db_user_collection
 from app.src.schema.schemas import user_serial_list_entity
+from whatsapp_bot.app.logs.logger import logger
 
 # Create an instance of APIRouter
 router = APIRouter()
@@ -11,19 +12,20 @@ router = APIRouter()
 # Endpoint for getting user count
 @router.get("/user_count") 
 async def get_user_count():
-    # User detais
-    user_details = user_serial_list_entity(get_mongo_db_user_collection().find())
-
-    # Count the number of users for each date
-    user_count = {}
-    for user in user_details:
-        user_created_at = user["created_at"].split()[0]
-        print(user_created_at)
-        if user_created_at in user_count:
-            user_count[user_created_at] += 1
-        else:
-            user_count[user_created_at] = 1
-    return user_count
+    try:
+        user_details = user_serial_list_entity(get_mongo_db_user_collection().find())
+        user_count = {}
+        for user in user_details:
+            user_created_at = user["created_at"].split()[0]
+            logger.debug(f"User created at: {user_created_at}")
+            if user_created_at in user_count:
+                user_count[user_created_at] += 1
+            else:
+                user_count[user_created_at] = 1
+        return user_count
+    except Exception as e:
+        logger.error(f"Error in getting user count: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # Endpoint to fetch user chat history
 @router.get("/user/details")
@@ -130,6 +132,10 @@ async def get_conversation_count():
 # Endpoint to delete user by ID
 @router.delete("/user/delete/{id}")
 async def delete_user(id: str):
-    # Find and delete the record with the specified ObjectId
-    get_mongo_db_user_collection().find_one_and_delete({"_id": ObjectId(id)})
-    return "Record delete successfully"
+    try:
+        get_mongo_db_user_collection().find_one_and_delete({"_id": ObjectId(id)})
+        logger.info(f"User with ID {id} deleted successfully.")
+        return "Record deleted successfully"
+    except Exception as e:
+        logger.error(f"Error in deleting user with ID {id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")

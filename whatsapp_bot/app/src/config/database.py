@@ -2,29 +2,30 @@ from pymongo import MongoClient
 from datetime import datetime
 from app.src.config.config import settings
 from app.src.models.user_details import UserDetail
+from whatsapp_bot.app.logs.logger import logger
 
 # Check if MongoDb collection exists, create it if it doesn't
 def check_mongo_db_collections():
     """
     Checks if the MongoDB collection exists, and creates it if it doesn't.
     """
-    # Create a MongoClient instance
-    client = MongoClient(settings.DATABASE_URL)
-    # print('Connected to MongoDB...')
-    
-    mongo_db = client[settings.MONGO_DB_NAME]
-    
-    if settings.MONGO_DB_USER_COLLECTION not in mongo_db.list_collection_names():
-        mongo_db.create_collection(settings.MONGO_DB_USER_COLLECTION)
-        print(f"Collection '{settings.MONGO_DB_USER_COLLECTION}' created successfully.")
-    else:
-        print(f"Collection '{settings.MONGO_DB_USER_COLLECTION}' already exists.")
+    try:
+        client = MongoClient(settings.DATABASE_URL)
+        mongo_db = client[settings.MONGO_DB_NAME]
         
-    if settings.MONGO_DB_CONVERSATION_COLLECTION not in mongo_db.list_collection_names():
-        mongo_db.create_collection(settings.MONGO_DB_CONVERSATION_COLLECTION)
-        print(f"Collection '{settings.MONGO_DB_CONVERSATION_COLLECTION}' created successfully.")
-    else:
-        print(f"Collection '{settings.MONGO_DB_CONVERSATION_COLLECTION}' already exists.")
+        if settings.MONGO_DB_USER_COLLECTION not in mongo_db.list_collection_names():
+            mongo_db.create_collection(settings.MONGO_DB_USER_COLLECTION)
+            logger.info(f"Collection '{settings.MONGO_DB_USER_COLLECTION}' created successfully.")
+        else:
+            logger.info(f"Collection '{settings.MONGO_DB_USER_COLLECTION}' already exists.")
+        
+        if settings.MONGO_DB_CONVERSATION_COLLECTION not in mongo_db.list_collection_names():
+            mongo_db.create_collection(settings.MONGO_DB_CONVERSATION_COLLECTION)
+            logger.info(f"Collection '{settings.MONGO_DB_CONVERSATION_COLLECTION}' created successfully.")
+        else:
+            logger.info(f"Collection '{settings.MONGO_DB_CONVERSATION_COLLECTION}' already exists.")
+    except Exception as e:
+        logger.error(f"Error in checking MongoDB collections: {str(e)}")
 
 def get_mongo_db_user_collection():
     """
@@ -199,21 +200,26 @@ def get_collection_details(mobile):
     return user_conversation_details
 
 def create_or_fetch_user(mobile):
-    collection = get_mongo_db_user_collection()
-    existing_user = collection.find_one({"mobile": mobile})
+    try:
+        collection = get_mongo_db_user_collection()
+        existing_user = collection.find_one({"mobile": mobile})
 
-    if existing_user:
-        return existing_user
-    else:
-        user_detail_data = {
-            "mobile": mobile,
-            "name": None,
-            "language": None,
-            "gender": None,
-            "location": None,
-            "consent": False,
-            "onboarded": False,
-            "created_at": datetime.utcnow(),
-        }
-        collection.insert_one(user_detail_data)
-        return user_detail_data
+        if existing_user:
+            return existing_user
+        else:
+            user_detail_data = {
+                "mobile": mobile,
+                "name": None,
+                "language": None,
+                "gender": None,
+                "location": None,
+                "consent": False,
+                "onboarded": False,
+                "created_at": datetime.utcnow(),
+            }
+            collection.insert_one(user_detail_data)
+            logger.info(f"User created with mobile: {mobile}")
+            return user_detail_data
+    except Exception as e:
+        logger.error(f"Error in creating or fetching user: {str(e)}")
+        return None

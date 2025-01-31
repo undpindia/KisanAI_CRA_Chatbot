@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 from io import BytesIO
 from fastapi import HTTPException
+from whatsapp_bot.app.logs.logger import logger
 
 def convert_ogg_to_wav(ogg_content, output_file):
     """
@@ -21,10 +22,10 @@ def convert_ogg_to_wav(ogg_content, output_file):
         # Export the WAV file
         sound.export(output_file, format="wav")
 
-        print("Conversion successful. WAV file saved as:", output_file)
+        logger.info(f"Conversion successful. WAV file saved as: {output_file}")
 
     except Exception as e:
-        print(f"Error processing ogg to wav: {str(e)}")
+        logger.error(f"Error processing ogg to wav: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 def convert_ogg_to_mp3(ogg_content, output_file):
@@ -46,8 +47,8 @@ def convert_ogg_to_mp3(ogg_content, output_file):
         # Export the MP3 file
         sound.export(output_file, format="mp3")
 
-        print("Conversion successful. MP3 file saved as:", output_file)
+        logger.info(f"Conversion successful. MP3 file saved as: {output_file}")
 
     except Exception as e:
-        print(f"Error processing ogg to mp3: {str(e)}")
+        logger.error(f"Error processing ogg to mp3: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")

@@ -1,5 +1,6 @@
 from datetime import datetime
 from app.src.config.database import get_mongo_db_user_collection
+from whatsapp_bot.app.logs.logger import logger
 
 
 class AppState:
@@ -118,20 +119,23 @@ class AppState:
         If user exists, updates the current state with stored values.
         If user is new, creates a new document with basic user details.
         """
-        collection = get_mongo_db_user_collection()
-        existing_user = collection.find_one({"mobile": self.mobile})
-        if existing_user:
-            # update state from user details, use every fetched field and update state
-            for key, value in existing_user.items():
-                setattr(self, key, value)
-        else:
-            self.created_at = datetime.utcnow()
-            
-            user_detail_data = {
-                "mobile": self.mobile,
-                "created_at": self.created_at,
-            }
-            collection.insert_one(user_detail_data)
+        try:
+            collection = get_mongo_db_user_collection()
+            existing_user = collection.find_one({"mobile": self.mobile})
+            if existing_user:
+                # update state from user details, use every fetched field and update state
+                for key, value in existing_user.items():
+                    setattr(self, key, value)
+            else:
+                self.created_at = datetime.utcnow()
+                
+                user_detail_data = {
+                    "mobile": self.mobile,
+                    "created_at": self.created_at,
+                }
+                collection.insert_one(user_detail_data)
+        except Exception as e:
+            logger.error(f"Error in creating or fetching user: {str(e)}")
                 
     def update_state_from_user(self, user_details):
         """
@@ -165,18 +169,21 @@ class AppState:
         Converts all instance attributes to a dictionary and updates or creates
         a new document in the database based on the mobile number.
         """
-        collection = get_mongo_db_user_collection()
-        existing_user = collection.find_one({"mobile": self.mobile})
+        try:
+            collection = get_mongo_db_user_collection()
+            existing_user = collection.find_one({"mobile": self.mobile})
 
-        # Convert instance attributes to a dictionary
-        updated_data = {field: value for field, value in self.__dict__.items()}
+            # Convert instance attributes to a dictionary
+            updated_data = {field: value for field, value in self.__dict__.items()}
 
-        if existing_user:
-            # Update existing user details
-            collection.update_one({"mobile": self.mobile}, {"$set": updated_data})
-        else:
-            # Insert new user details
-            collection.insert_one(updated_data)
+            if existing_user:
+                # Update existing user details
+                collection.update_one({"mobile": self.mobile}, {"$set": updated_data})
+            else:
+                # Insert new user details
+                collection.insert_one(updated_data)
+        except Exception as e:
+            logger.error(f"Error in saving state: {str(e)}")
     
     def reset(self, mobile):
         """
@@ -270,9 +277,12 @@ class AppState:
             
         Updates current state with fetched values if user exists.
         """
-        collection = get_mongo_db_user_collection()
-        user_details = collection.find_one({"mobile": mobile})
-        if user_details:
-            self.update_state_from_user(user_details)
-        else:
-            print("User not found")   
+        try:
+            collection = get_mongo_db_user_collection()
+            user_details = collection.find_one({"mobile": mobile})
+            if user_details:
+                self.update_state_from_user(user_details)
+            else:
+                print("User not found")
+        except Exception as e:
+            logger.error(f"Error in fetching state for mobile {mobile}: {str(e)}")   

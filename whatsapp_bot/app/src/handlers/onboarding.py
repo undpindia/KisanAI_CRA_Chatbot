@@ -7,6 +7,7 @@ import re
 from app.src.handlers.instances import messenger
 from app.src.services.speech.stt import openai_whisper
 from app.src.config.config import settings  # Add this import at the top
+from whatsapp_bot.app.logs.logger import logger
 
 class OnboardingProcess:
     """
@@ -145,7 +146,7 @@ class OnboardingProcess:
             else:
                 pass
         except Exception as e:
-            logging.error(f"Error in onboarding process: {str(e)}")
+            logger.error(f"Error in onboarding process: {str(e)}")
             return 
     
     async def send_language_selection(self):

@@ -1,3 +1,5 @@
+from whatsapp_bot.app.logs.logger import logger
+
 def user_serial_entity(userdetail) -> dict:
     """
     Serializes a single user details into a dictionary.
@@ -8,25 +10,29 @@ def user_serial_entity(userdetail) -> dict:
     Returns:
         dict: Serialized user details.
     """
-    return{
-        "id": str(userdetail["_id"]),
-        "mobile": userdetail["mobile"],
-        "language": userdetail["language"],
-        "name": userdetail["name"],
-        "location": userdetail["location"],
-        "gender": userdetail["gender"],
-        "onboarded": userdetail["onboarded"],
-        "created_at": userdetail["created_at"],
-        "question_answers": [
-            {
-            "question_format" : qa["question_format"],
-            "question" : qa["question"],
-            "answer" : qa["answer"],
-            "timestamp" : qa["timestamp"]
-            }
-            for qa in userdetail.get("questions_answers", [])
-        ]
-    }
+    try:
+        return{
+            "id": str(userdetail["_id"]),
+            "mobile": userdetail["mobile"],
+            "language": userdetail["language"],
+            "name": userdetail["name"],
+            "location": userdetail["location"],
+            "gender": userdetail["gender"],
+            "onboarded": userdetail["onboarded"],
+            "created_at": userdetail["created_at"],
+            "question_answers": [
+                {
+                "question_format" : qa["question_format"],
+                "question" : qa["question"],
+                "answer" : qa["answer"],
+                "timestamp" : qa["timestamp"]
+                }
+                for qa in userdetail.get("questions_answers", [])
+            ]
+        }
+    except Exception as e:
+        logger.error(f"Error in serializing user entity: {str(e)}")
+        return {}
 
 def user_serial_list_entity(userdetails) -> list:
     """
@@ -73,4 +79,8 @@ def user_conversation_serial_list_entity(userconversationdetails) -> list:
     Returns:
         list: List of serialized user conversation details.
     """
-    return [user_conversation_serial_entity(userconversationdetail) for userconversationdetail in userconversationdetails]
+    try:
+        return [user_conversation_serial_entity(userconversationdetail) for userconversationdetail in userconversationdetails]
+    except Exception as e:
+        logger.error(f"Error in serializing user conversation list: {str(e)}")
+        return []

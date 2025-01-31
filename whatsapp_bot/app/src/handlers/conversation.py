@@ -11,6 +11,7 @@ from app.src.services.speech.converter import convert_ogg_to_wav
 from app.src.services.speech.stt import openai_whisper, azure_speech_to_text
 from app.src.services.llm.query_engine import QueryEngine
 from app.src.config.database import store_conversation, get_last_conversation, get_conversation_by_chat_id, update_conversation
+from whatsapp_bot.app.logs.logger import logger
 
 class ConversationHandler:
     """
@@ -65,14 +66,17 @@ class ConversationHandler:
         Determines the message type and delegates processing to the corresponding
         handler method (text, audio, or interactive).
         """
-        if self.message_type == "text":
-            await self.handle_text_message()
-        elif self.message_type == "audio":
-            await self.handle_audio_message()
-        elif self.message_type == "interactive":
-            await self.handle_audio_interactive_message()
-        else:
-            pass
+        try:
+            if self.message_type == "text":
+                await self.handle_text_message()
+            elif self.message_type == "audio":
+                await self.handle_audio_message()
+            elif self.message_type == "interactive":
+                await self.handle_audio_interactive_message()
+            else:
+                pass
+        except Exception as e:
+            logger.error(f"Error in chat handling: {str(e)}")
         
     async def handle_text_message(self):
         """
@@ -81,26 +85,29 @@ class ConversationHandler:
         Extracts the message content, generates a response using the query engine,
         stores the conversation in the database, and sends the response back to the user.
         """
-        message = messenger.get_message(self.data)
-        
-        if message:
-        
-            answer = self.query_engine.text_query_response(question=message,
-                                                    question_prev=self.question_prev,
-                                                    answer_prev=self.answer_prev)
-            chat_id = str(uuid.uuid4())
-            store_conversation(mobile=self.state.mobile, 
-                            chat_id=chat_id, 
-                            language=self.state.language, 
-                            question_format="text", 
-                            question=message, 
-                            question_en=self.query_engine.answer_en, 
-                            answer=answer, 
-                            answer_en=self.query_engine.answer_en, 
-                            context=self.query_engine.context,
-                            location=self.state.location)
-            messenger.send_message(user_phone_number=self.state.mobile,
-                                message=answer)
+        try:
+            message = messenger.get_message(self.data)
+            
+            if message:
+            
+                answer = self.query_engine.text_query_response(question=message,
+                                                        question_prev=self.question_prev,
+                                                        answer_prev=self.answer_prev)
+                chat_id = str(uuid.uuid4())
+                store_conversation(mobile=self.state.mobile, 
+                                chat_id=chat_id, 
+                                language=self.state.language, 
+                                question_format="text", 
+                                question=message, 
+                                question_en=self.query_engine.answer_en, 
+                                answer=answer, 
+                                answer_en=self.query_engine.answer_en, 
+                                context=self.query_engine.context,
+                                location=self.state.location)
+                messenger.send_message(user_phone_number=self.state.mobile,
+                                    message=answer)
+        except Exception as e:
+            logger.error(f"Error in handling text message: {str(e)}")
     
     async def handle_audio_message(self):
         """
@@ -117,11 +124,10 @@ class ConversationHandler:
         4. Generating and storing responses
         5. Handling audio file storage
         """
-        # create tempaudio file
-        audio_data = messenger.get_audio_message_file(self.data)
-        temp_wav_file_path = None
         try:
-            # Convert the OGG audio data to MP3
+            # create tempaudio file
+            audio_data = messenger.get_audio_message_file(self.data)
+            temp_wav_file_path = None
             with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_wav_file:
                 convert_ogg_to_wav(audio_data, temp_wav_file)
                 temp_wav_file_path = temp_wav_file.name
@@ -195,7 +201,7 @@ class ConversationHandler:
                 messenger.send_message(user_phone_number=self.state.mobile, message=message)
                 
         except Exception as e:
-            logging.error(f"Error: {str(e)}")
+            logger.error(f"Error in handling audio message: {str(e)}")
             return
     
     async def handle_audio_interactive_message(self):
@@ -206,53 +212,56 @@ class ConversationHandler:
         the delivery of corresponding text and audio responses. Implements retry
         logic for fetching conversation data from the database.
         """
-        message_response = messenger.get_interactive_response(self.data)
-        interactive_type = message_response.get("type")
-        button_reply_title = message_response[interactive_type]["title"]
-        button_reply_id = message_response[interactive_type]["id"]
-        print(f"Button reply title: {button_reply_title}")
-        print(f"Button reply id: {button_reply_id}")
+        try:
+            message_response = messenger.get_interactive_response(self.data)
+            interactive_type = message_response.get("type")
+            button_reply_title = message_response[interactive_type]["title"]
+            button_reply_id = message_response[interactive_type]["id"]
+            print(f"Button reply title: {button_reply_title}")
+            print(f"Button reply id: {button_reply_id}")
 
-        # Extract chat_id and confirmation status
-        parts = button_reply_id.split('_')
-        chat_id = parts[0]
-        confirmation_status = parts[-1]
+            # Extract chat_id and confirmation status
+            parts = button_reply_id.split('_')
+            chat_id = parts[0]
+            confirmation_status = parts[-1]
 
-        if confirmation_status == '1':
-            # User confirmed the question, fetch the answer from MongoDB
-            conversation = None
-            for attempt in range(3):
-                conversation = get_conversation_by_chat_id(chat_id)
-                if conversation:
-                    answer_status = conversation.get("answer_status", False)
-                    if answer_status == True:
-                        break
-                # Wait for incremental delay before retrying
-                await asyncio.sleep(attempt + 1)
-            
-            if conversation and answer_status == True:
-                answer = conversation.get("answer", "Sorry, I could not find the answer.")
-                messenger.send_message(user_phone_number=self.state.mobile, message=answer)
+            if confirmation_status == '1':
+                # User confirmed the question, fetch the answer from MongoDB
+                conversation = None
+                for attempt in range(3):
+                    conversation = get_conversation_by_chat_id(chat_id)
+                    if conversation:
+                        answer_status = conversation.get("answer_status", False)
+                        if answer_status == True:
+                            break
+                    # Wait for incremental delay before retrying
+                    await asyncio.sleep(attempt + 1)
+                
+                if conversation and answer_status == True:
+                    answer = conversation.get("answer", "Sorry, I could not find the answer.")
+                    messenger.send_message(user_phone_number=self.state.mobile, message=answer)
+                else:
+                    messenger.send_message(user_phone_number=self.state.mobile, message="Something went wrong. Please try again.")
+
+                for attempt in range(3):
+                    conversation = get_conversation_by_chat_id(chat_id)
+                    if conversation:
+                        answer_audio_status = conversation.get("answer_audio_status", False)
+                        if answer_audio_status == True:
+                            break
+                    # Wait for incremental delay before retrying
+                    await asyncio.sleep(attempt + 1)
+                
+                if conversation and answer_audio_status == True:
+                    answer_audio_url = conversation.get("answer_audio_url", None)
+                    if answer_audio_url:
+                        messenger.send_audio(user_phone_number=self.state.mobile, audio=answer_audio_url)
+                else:
+                    messenger.send_message(user_phone_number=self.state.mobile, message="Something went wrong. Please try again.")
             else:
-                messenger.send_message(user_phone_number=self.state.mobile, message="Something went wrong. Please try again.")
-
-            for attempt in range(3):
-                conversation = get_conversation_by_chat_id(chat_id)
-                if conversation:
-                    answer_audio_status = conversation.get("answer_audio_status", False)
-                    if answer_audio_status == True:
-                        break
-                # Wait for incremental delay before retrying
-                await asyncio.sleep(attempt + 1)
-            
-            if conversation and answer_audio_status == True:
-                answer_audio_url = conversation.get("answer_audio_url", None)
-                if answer_audio_url:
-                    messenger.send_audio(user_phone_number=self.state.mobile, audio=answer_audio_url)
-            else:
-                messenger.send_message(user_phone_number=self.state.mobile, message="Something went wrong. Please try again.")
-        else:
-            # User did not confirm the question, do nothing or handle accordingly
-            pass
+                # User did not confirm the question, do nothing or handle accordingly
+                pass
+        except Exception as e:
+            logger.error(f"Error in handling interactive message: {str(e)}")
     
 

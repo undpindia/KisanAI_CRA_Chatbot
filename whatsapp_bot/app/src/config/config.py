@@ -3,6 +3,7 @@ import logging
 import os
 from pathlib import Path
 from functools import lru_cache
+from whatsapp_bot.app.logs.logger import logger
 
 def clear_environment_variables():
     """Clear all relevant environment variables except OPENAI_API_KEY"""
@@ -25,6 +26,7 @@ def clear_environment_variables():
     for var in env_vars:
         if var in os.environ:
             os.environ.pop(var)
+    logger.info("Environment variables cleared successfully.")
 
 def set_openai_key(api_key: str):
     """Set OpenAI API key in environment"""

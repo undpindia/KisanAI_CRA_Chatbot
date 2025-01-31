@@ -5,6 +5,7 @@ from time import time
 import requests
 from typing import Dict, Any, Union
 import logging
+from whatsapp_bot.app.logs.logger import logger
 
 # Setup logging
 logging.getLogger(__name__).addHandler(logging.NullHandler())
@@ -52,21 +53,24 @@ class WhatsApp():
         Returns:
         - dict: If the message is successfully sent, returns the body message.
         """
-        data = {
-            "messaging_product": "whatsapp",
-            "to": user_phone_number,
-            "type": "text",
-            "text": {"body": message},
-        }
+        try:
+            data = {
+                "messaging_product": "whatsapp",
+                "to": user_phone_number,
+                "type": "text",
+                "text": {"body": message},
+            }
 
-        response = requests.request("POST", f"{self.url}/messages", headers=self.headers, json=data)
-        if response.status_code == 200:
-            logging.info(f"Message sent to {user_phone_number}")
-            logging.info(f"Response: {response.json()}")
-            return message
-        else:
-            logging.info(f"Message not sent to {user_phone_number}")
-            logging.info(f"Response: {response.json()}")
+            response = requests.request("POST", f"{self.url}/messages", headers=self.headers, json=data)
+            if response.status_code == 200:
+                logger.info(f"Message sent to {user_phone_number}: {message}")
+                logger.info(f"Response: {response.json()}")
+                return message
+            else:
+                logger.info(f"Message not sent to {user_phone_number}")
+                logger.info(f"Response: {response.json()}")
+        except Exception as e:
+            logger.error(f"Error in sending message to {user_phone_number}: {str(e)}")
 
     def preprocess(self, data: Dict[Any, Any]) -> Dict[Any, Any]:
         """
@@ -225,28 +229,31 @@ class WhatsApp():
         - link (bool): Whether to send an audio id or an audio link. 
             True means that the audio is an id, False means that the audio is a link. Default is True.
         """
-        if link:
-            data = {
-                "messaging_product": "whatsapp",
-                "to": user_phone_number,
-                "type": "audio",
-                "audio": {"link": audio},
-            }
-        else:
-            data = {
-                "messaging_product": "whatsapp",
-                "to": user_phone_number,
-                "type": "audio",
-                "audio": {"id": audio},
-            }
+        try:
+            if link:
+                data = {
+                    "messaging_product": "whatsapp",
+                    "to": user_phone_number,
+                    "type": "audio",
+                    "audio": {"link": audio},
+                }
+            else:
+                data = {
+                    "messaging_product": "whatsapp",
+                    "to": user_phone_number,
+                    "type": "audio",
+                    "audio": {"id": audio},
+                }
 
-        response = requests.request("POST", f"{self.url}/messages", headers=self.headers, json=data)
-        if response.status_code == 200:
-            logging.info(f"Audio sent to {user_phone_number}")
-            return True
-        else:
-            logging.info(f"Audio not sent to {user_phone_number}")
-            return False
+            response = requests.request("POST", f"{self.url}/messages", headers=self.headers, json=data)
+            if response.status_code == 200:
+                logger.info(f"Audio sent to {user_phone_number}")
+                return True
+            else:
+                logger.info(f"Audio not sent to {user_phone_number}")
+                return False
+        except Exception as e:
+            logger.error(f"Error in sending audio to {user_phone_number}: {str(e)}")
 
     def send_video(self, video, user_phone_number, caption, link=True):
         """

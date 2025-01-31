@@ -27,6 +27,7 @@ from app.src.handlers.analytics import user_analytics
 from app.src.handlers.conversation import ConversationHandler
 from app.src.schema.schemas import user_serial_list_entity
 from app.src.config.config import settings
+from whatsapp_bot.app.logs.logger import logger
 
 # Initialize Sentry
 sentry_sdk.init(
@@ -108,8 +109,7 @@ async def webhook_whatsapp(request: Request):
                         await conversation_handler.chat()
 
     except Exception as e:
-        logging.error(f"Error processing webhook: {str(e)}")
-        print(f"Error processing webhook: {str(e)}")
+        logger.error(f"Error processing webhook: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
     return JSONResponse(content={"status": "200 OK HTTPS."}, status_code=200)
